@@ -21,27 +21,24 @@
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
                                 <th scope="col">Rota</th>
-                                <th scope="col">Combôios</th>
-                                {{--  <th scope="col">Qtd Total </th>
-                                <th scope="col">Qtd de Alerta</th>  --}}
+
+
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($routes as $route)
                                     <tr>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ count($category->products) }}</td>
-                                        {{--  <td>{{ $category->products->sum('stock') }}</td>
-                                        <td>{{ $category->products->sum('stock_defective') }}</td>  --}}
+                                        <td>{{ $route->name }}</td>
+
 
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('categories.show', $category) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More Details">
+                                            <a href="{{ route('routes.show', $route) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More Details">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
-                                            <a href="{{ route('categories.edit', $category) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Category">
+                                            <a href="{{ route('routes.edit', $route) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Category">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </a>
-                                            <form action="{{ route('categories.destroy', $category) }}" method="post" class="d-inline">
+                                            <form action="{{ route('routes.destroy', $route) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Eliminar item" onclick="confirm('Confirmar ?') ? this.parentElement.submit() : ''">
@@ -57,7 +54,7 @@
                 </div>
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
-                        {{ $categories->links() }}
+                        {{ $routes->links() }}
                     </nav>
                 </div>
             </div>

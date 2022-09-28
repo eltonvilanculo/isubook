@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Nova Rota', 'pageSlug' => 'routes', 'section' => 'inventory'])
+@extends('layouts.app', ['page' => 'Nova Rota', 'pageSlug' => 'categories', 'section' => 'inventory'])
 
 @section('content')
     <div class="container-fluid mt--7">
@@ -11,12 +11,12 @@
                                 <h3 class="mb-0">Nova Rota</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('routes.index') }}" class="btn btn-sm btn-primary">De volta à lista</a>
+                                <a href="{{ route('categories.index') }}" class="btn btn-sm btn-primary">De volta à lista</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('routes.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('categories.store') }}" autocomplete="off">
                             @csrf
 
                             <h6 class="heading-small text-muted mb-4">Informações da rota</h6>

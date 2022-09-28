@@ -7,7 +7,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Total de pedidos</h5>
+                            <h5 class="card-category">Viagens realizadas mensalmente</h5>
                             <h2 class="card-title">Actividade anual</h2>
                         </div>
                         {{--  <div class="col-sm-6">
@@ -47,11 +47,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Pedidos em progresso</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-paper text-warning"></i> {{ $pending }}</h3>
+                    <h5 class="card-category">Combôios sem actividade</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $pending }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -60,11 +60,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Pedidos devolvidos</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-paper text-success"></i> {{ $done }}</h3>
+                    <h5 class="card-category">Combôios em actividade</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $done }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -73,11 +73,25 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Pedidos em atraso</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-paper text-danger"></i> {{ $overdue }}</h3>
+                    <h5 class="card-category">Maquinistas disponíveis </h5>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $overdue }}</h3>
+                </div>
+                <div class="card-body" style="display: none;">
+                    <div class="chart-area">
+                        <canvas id="chartLineGreen"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <div class="col-lg-3">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Maquinistas em actividade</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $overdue }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -94,10 +108,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Fila de pedidos pendentes</h4>
+                            <h4 class="card-title">Fila de viagens em progresso</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Novo Pedido</a>
+                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
                         </div>
                     </div>
                 </div>
@@ -110,10 +124,10 @@
                                         Data
                                     </th>
                                     <th>
-                                        Utilizador
+                                        Maquinista
                                     </th>
                                     <th>
-                                        Item
+                                        Combôio
                                     </th>
 
                                     <th>
@@ -125,11 +139,14 @@
                                 @foreach ($unfinishedsales as $sale)
                                     <tr>
                                         <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
-                                        <td><a href="">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>
+                                        <td><a
+                                                href="">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a>
+                                        </td>
                                         <td>{{ $sale->products->count() }}</td>
 
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
+                                            <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
                                         </td>
@@ -144,21 +161,25 @@
 
     </div>
 
-    <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModal" aria-hidden="true">
+    <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModal"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Nova transação</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('transactions.create', ['type' => 'payment']) }}" class="btn btn-sm btn-primary">Pagamento</a>
-                        <a href="{{ route('transactions.create', ['type' => 'income']) }}" class="btn btn-sm btn-primary">Fechamento
+                        <a href="{{ route('transactions.create', ['type' => 'payment']) }}"
+                            class="btn btn-sm btn-primary">Pagamento</a>
+                        <a href="{{ route('transactions.create', ['type' => 'income']) }}"
+                            class="btn btn-sm btn-primary">Fechamento
                         </a>
-                        <a href="{{ route('transactions.create', ['type' => 'expense']) }}" class="btn btn-sm btn-primary">Despesa</a>
+                        <a href="{{ route('transactions.create', ['type' => 'expense']) }}"
+                            class="btn btn-sm btn-primary">Despesa</a>
                         <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Empréstimo</a>
                         <a href="{{ route('transfer.create') }}" class="btn btn-sm btn-primary">Transferência</a>
                     </div>
@@ -186,7 +207,7 @@
         var methods = [];
         var methods_stats = [];
 
-        @foreach($monthlybalancebymethod as $method => $balance)
+        @foreach ($monthlybalancebymethod as $method => $balance)
             methods.push('{{ $method }}');
             methods_stats.push('{{ $balance }}');
         @endforeach

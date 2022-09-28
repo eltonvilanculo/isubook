@@ -14,7 +14,7 @@
                 <li>
                     <a data-toggle="collapse" href="#inventory" {{ $section == 'inventory' ? 'aria-expanded=true' : '' }}>
                         <i class="tim-icons icon-paper"></i>
-                        <span class="nav-link-text">Invetário</span>
+                        <span class="nav-link-text">Logística</span>
                         <b class="caret mt-1"></b>
                     </a>
 
@@ -26,23 +26,23 @@
                                     <p>Estatísticas</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'categories') class="active " @endif>
-                                <a href="{{ route('categories.index') }}">
-                                    <i class="tim-icons icon-components"></i>
-                                    <p>Categorias</p>
+                            <li @if ($pageSlug == 'routes') class="active " @endif>
+                                <a href="{{ route('routes.index') }}">
+                                    <i class="tim-icons icon-square-pin"></i>
+                                    <p>Rotas</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'products') class="active " @endif>
                                 <a href="{{ route('products.index') }}">
-                                    <i class="tim-icons icon-bag-16"></i>
-                                    <p>Livraria</p>
+                                    <i class="tim-icons icon-bus-front-12"></i>
+                                    <p>Combôios</p>
                                 </a>
                             </li>
 
                <li @if ($pageSlug == 'sales') class="active " @endif>
                                 <a href="{{ route('sales.index') }}">
-                                    <i class="tim-icons icon-bag-16"></i>
-                                    <p>Pedidos</p>
+                                    <i class="tim-icons icon-vector"></i>
+                                    <p>Atribuições</p>
                                 </a>
                             </li>
 
@@ -82,7 +82,7 @@
     <li>
         <a data-toggle="collapse" href="#users" {{ $section == 'users' ? 'aria-expanded=true' : '' }}>
             <i class="tim-icons icon-badge"></i>
-            <span class="nav-link-text">Utilizadores</span>
+            <span class="nav-link-text">Maquinistas</span>
             <b class="caret mt-1"></b>
         </a>
 

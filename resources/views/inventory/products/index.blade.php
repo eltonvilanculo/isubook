@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Livraria', 'pageSlug' => 'products', 'section' => 'inventory'])
+@extends('layouts.app', ['page' => 'Gestão de combôios', 'pageSlug' => 'products', 'section' => 'inventory'])
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Livraria</h4>
+                            <h4 class="card-title">Combôios</h4>
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">Novo item</a>
@@ -20,11 +20,11 @@
                     <div class="">
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
-                                <th scope="col">Categoria</th>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Qtd Total</th>
-                                <th scope="col">Qtd de Alerta</th>
-                                <th scope="col">Total Pedido</th>
+                                <th scope="col">Rota</th>
+                                <th scope="col">Designação</th>
+                                <th scope="col">Vagões</th>
+                                {{--  <th scope="col">Qtd de Alerta</th>  --}}
+                                <th scope="col">Total Atribuições</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -34,7 +34,7 @@
                                         <td>{{ $product->name }}</td>
 
                                         <td>{{ $product->stock }}</td>
-                                        <td>{{ $product->stock_defective }}</td>
+                                        {{--  <td>{{ $product->stock_defective }}</td>  --}}
                                         <td>{{ $product->solds->sum('qty') }}</td>
                                         <td class="td-actions text-right">
                                             <a href="{{ route('products.show', $product) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais detalhes">
