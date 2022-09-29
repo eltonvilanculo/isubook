@@ -32,15 +32,21 @@
                                     <p>Rotas</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'products') class="active " @endif>
-                                <a href="{{ route('products.index') }}">
+                            <li @if ($pageSlug == 'trains') class="active " @endif>
+                                <a href="{{ route('trains.index') }}">
                                     <i class="tim-icons icon-bus-front-12"></i>
                                     <p>Combôios</p>
                                 </a>
                             </li>
+                            <li @if ($pageSlug == 'workers') class="active " @endif>
+                                <a href="{{ route('workers.index') }}">
+                                    <i class="tim-icons icon-badge"></i>
+                                    <p>Maquinistas</p>
+                                </a>
+                            </li>
 
-               <li @if ($pageSlug == 'sales') class="active " @endif>
-                                <a href="{{ route('sales.index') }}">
+               <li @if ($pageSlug == 'travels') class="active " @endif>
+                                <a href="{{ route('travels.index') }}">
                                     <i class="tim-icons icon-vector"></i>
                                     <p>Atribuições</p>
                                 </a>
@@ -79,38 +85,6 @@
     @endif
 
 
-    <li>
-        <a data-toggle="collapse" href="#users" {{ $section == 'users' ? 'aria-expanded=true' : '' }}>
-            <i class="tim-icons icon-badge"></i>
-            <span class="nav-link-text">Maquinistas</span>
-            <b class="caret mt-1"></b>
-        </a>
-
-        <div class="collapse {{ $section == 'users' ? 'aria-expanded=true' : '' }}" id="users">
-            <ul class="nav pl-4">
-                <li @if ($pageSlug == 'profile') class="active " @endif>
-                    <a href="{{ route('profile.edit') }}">
-                        <i class="tim-icons icon-badge"></i>
-                        <p>Meu perfil</p>
-                    </a>
-                </li>
-                 @if(Auth::user()->type==0)
-                <li @if ($pageSlug == 'users-list') class="active " @endif>
-                    <a href="{{ route('users.index') }}">
-                        <i class="tim-icons icon-notes"></i>
-                        <p>Gestão de utilizadores</p>
-                    </a>
-                </li>
-                <li @if ($pageSlug == 'users-create') class="active " @endif>
-                    <a href="{{ route('users.create') }}">
-                        <i class="tim-icons icon-simple-add"></i>
-                        <p>Novo utilizador</p>
-                    </a>
-                </li>
-                @endif
-            </ul>
-        </div>
-    </li>
 
 
 

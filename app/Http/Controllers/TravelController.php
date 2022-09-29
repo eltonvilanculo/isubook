@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Train;
 use App\Travel;
+use App\Worker;
 use Illuminate\Http\Request;
 
 class TravelController extends Controller
@@ -14,6 +16,10 @@ class TravelController extends Controller
      */
     public function index()
     {
+        $travels  =  Travel::with('train')->with('worker')->latest()->paginate(25);
+
+        return view('travel.assignment.index',compact('travels'));
+
         //
     }
 
@@ -25,6 +31,11 @@ class TravelController extends Controller
     public function create()
     {
         //
+
+        $workers = Worker::where('status',1)->get();
+        $trains = Train::all();
+
+        return view('travel.assignment.create', compact('workers', 'trains'));
     }
 
     /**
@@ -33,9 +44,21 @@ class TravelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Travel $travel)
     {
         //
+
+        $worker =Worker::findOrFail($request->worker_id)->first();
+        $worker->status =  1 ;
+        if($worker->save()){
+
+            $travel->create($request->all());
+        }
+        return redirect()
+            ->route('travels.index')
+            ->withStatus('Viagem registada com sucesso!');
+
+
     }
 
     /**

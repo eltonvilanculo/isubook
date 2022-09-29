@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Worker;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WorkerController extends Controller
@@ -15,6 +16,13 @@ class WorkerController extends Controller
     public function index()
     {
         //
+        $workers = Worker::latest()->paginate(25);
+        foreach ($workers as $key=> $worker) {
+
+            $workers[$key]->eta = Carbon::parse($worker->updated_at)->diffForHumans();
+        }
+
+        return view ('travel.workers.index',compact('workers'));
     }
 
     /**
@@ -25,6 +33,8 @@ class WorkerController extends Controller
     public function create()
     {
         //
+
+        return view ('travel.workers.create');
     }
 
     /**
@@ -33,8 +43,13 @@ class WorkerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Worker  $worker)
     {
+        $worker->create($request->all());
+
+        return redirect()
+            ->route('workers.index')
+            ->withStatus('Maquinista cadastrado com sucesso!');
         //
     }
 

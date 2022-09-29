@@ -32,6 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
         'provinces'=>'ProvincesController',
         'centrals'=>'CentralController',
         'routes'=>'RouteController',
+        'trains'=>'TrainController',
+        'workers' =>'WorkerController',
+        'travels' =>'TravelController',
     ]);
 
     Route::resource('transactions', 'TransactionController')->except(['create', 'show']);

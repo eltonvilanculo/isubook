@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Gestão de pedidos', 'pageSlug' => 'sales', 'section' => 'transactions'])
+@extends('layouts.app', ['page' => 'Gestão de pedidos', 'pageSlug' => 'travels', 'section' => 'transactions'])
 
 @section('content')
     @include('alerts.success')
@@ -11,7 +11,7 @@
                             <h4 class="card-title">Gestão de Atribuições</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Novo pedido</a>
+                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Nova atribuição</a>
                         </div>
                     </div>
                 </div>
@@ -28,36 +28,46 @@
                                 <th></th>
                             </thead>
                             <tbody>
-                                @foreach ($sales as $sale)
+                                @foreach ($travels as $travel)
 
                                     <tr>
-                                        <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
-                                        <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
 
-                                        {{--  <td><a href="{{route('clients.show',$sale->client)}}">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>  --}}
-                                        <td>{{ $sale->user->name }}</td>
-                                        <td>{{ $sale->client->name }}</td>
-                                        <td>{{ $sale->products->count() }}</td>
-                                        <td>{{ $sale->products->sum('qty') }}</td>
-                                        <td>
-                                            @if (!$sale->finalized_at)
-                                                <span class="text-danger">Por finalizar</span>
-                                            @else
-                                                <span class="text-success">Finalizada</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $sale->return_status }}</td>
+
+                                        {{--  <td><a href="{{route('clients.show',$travel->client)}}">{{ $travel->client->name }}<br>{{ $travel->client->document_type }}-{{ $travel->client->document_id }}</a></td>  --}}
+                                        <td>{{ $travel->worker->name }}</td>
+                                        <td>{{ $travel->train->name }}</td>
+                                        <td>{{ Auth::user()->name }}</td>
+                                        <td>{{ date('d-m-y', strtotime($travel->created_at))}}</td>
+                                        <td>{{$travel->end_time}}</td>
+                                        @switch($travel->status)
+
+                                        @case(0)
+
+
+                                        <td> <span class="text-danger">Viagem cancelada </span></td>
+                                        @break
+                                        @case(1)
+
+
+                                        <td><span class="text-warning">Viagem em progresso</span></td>
+                                        @break
+                                        @case(2)
+
+
+                                        <td><span class="text-success"> Viagem concluída </span></td>
+                                        @break
+                                        @endswitch
                                         <td class="td-actions text-right">
-                                            @if (!$sale->finalized_at)
-                                                <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar pedido">
+                                            @if (!$travel->finalized_at)
+                                                <a href="{{ route('travels.show', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar pedido">
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </a>
                                             @else
-                                                <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
+                                                <a href="{{ route('travels.show', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
                                                     <i class="tim-icons icon-zoom-split"></i>
                                                 </a>
                                             @endif
-                                            <form action="{{ route('sales.destroy', $sale) }}" method="post" class="d-inline">
+                                            <form action="{{ route('travels.destroy', $travel) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Devolver" onclick="confirm('Confirmar devolução?') ? this.parentElement.submit() : ''">
@@ -73,7 +83,7 @@
                 </div>
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
-                        {{ $sales->links() }}
+                        {{ $travels->links() }}
                     </nav>
                 </div>
             </div>

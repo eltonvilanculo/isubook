@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Route;
 use App\Train;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,9 @@ class TrainController extends Controller
     public function index()
     {
         //
+        $trains  =  Train::with('route')->latest()->paginate(25);
+       
+        return view('travel.trains.index',compact('trains'));
     }
 
     /**
@@ -25,6 +29,8 @@ class TrainController extends Controller
     public function create()
     {
         //
+        $routes =  Route::all();
+        return view('travel.trains.create', compact('routes'));
     }
 
     /**
@@ -33,9 +39,14 @@ class TrainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Train  $train)
     {
         //
+        $train->create($request->all());
+
+        return redirect()
+            ->route('trains.index')
+            ->withStatus('Item adicionado com sucesso!');
     }
 
     /**
