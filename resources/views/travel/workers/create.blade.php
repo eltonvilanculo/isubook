@@ -22,17 +22,30 @@
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">Nome</label>
-                                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Nome" value="{{ old('name') }}" required autofocus>
+                                    <input type="text" name="name" id="input-name"
+                                        class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                        placeholder="Nome" value="{{ old('name') }}" required autofocus>
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
 
 
                                 <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-phone">Telefone</label>
-                                    <input type="text" name="phone" id="input-phone" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Contacto" value="{{ old('phone') }}" required>
+                                    <input type="text" name="phone" id="input-phone"
+                                        class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                        placeholder="Contacto" value="{{ old('phone') }}" required>
                                     @include('alerts.feedback', ['field' => 'phone'])
                                 </div>
-
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-name">Categoria</label>
+                                    <select name="type" id="input-type"
+                                        class="form-select form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                        required>
+                                        <option value="1" selected>Maqnta A</option>
+                                        <option value="2" selected>Maqnta B</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'type'])
+                                </div>
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">Salvar</button>

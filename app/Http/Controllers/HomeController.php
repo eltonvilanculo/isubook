@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
 use App\PaymentMethod;
+use App\Travel;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -40,9 +41,9 @@ class HomeController extends Controller
                 'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
                 'semesterexpenses'          => $this->getMonthlyTransactions()->get('semesterexpenses'),
                 'semesterincomes'           => $this->getMonthlyTransactions()->get('semesterincomes'),
-                'pending'=>count(Sale::where('return_status','Em emprestimo')->get()),
-                'done'=>count(Sale::where('return_status','Devolvido')->get()),
-                'overdue'=>count(Sale::where('return_status','Atrasado')->get()),
+                'pending'=>count(Travel::where('status',0)->get()),
+                'done'=>count((Travel::where('status',1)->get())),
+                'overdue'=>(count(Travel::where('status',1)->get())),
             ]);
         }else{
             return redirect()->route('sales.index');

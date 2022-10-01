@@ -32,7 +32,7 @@ class TravelController extends Controller
     {
         //
 
-        $workers = Worker::where('status',1)->get();
+        $workers = Worker::where('status',0)->get();
         $trains = Train::all();
 
         return view('travel.assignment.create', compact('workers', 'trains'));
@@ -48,8 +48,9 @@ class TravelController extends Controller
     {
         //
 
-        $worker =Worker::findOrFail($request->worker_id)->first();
+        $worker =Worker::findOrFail($request->worker_id);
         $worker->status =  1 ;
+     
         if($worker->save()){
 
             $travel->create($request->all());
@@ -81,6 +82,16 @@ class TravelController extends Controller
     public function edit(Travel $travel)
     {
         //
+
+        $travel->status = 2;
+        $travel->save();
+        $worker = Worker::findOrFail($travel->worker_id);
+        $worker->status = 0;
+        $worker->save();
+        return redirect()
+        ->route('travels.index')
+        ->withStatus('Viagem conculída com sucesso!');
+
     }
 
     /**
@@ -104,5 +115,15 @@ class TravelController extends Controller
     public function destroy(Travel $travel)
     {
         //
+
+        $travel->status = 0;
+        $worker = Worker::findOrFail($travel->worker_id);
+        $worker->status = 0;
+        $worker->save();
+        $travel->save();
+
+        return redirect()
+        ->route('travels.index')
+        ->withStatus('Viagem cancelada com sucesso!');
     }
 }

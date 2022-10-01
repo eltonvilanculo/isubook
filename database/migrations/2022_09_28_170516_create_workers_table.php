@@ -18,6 +18,7 @@ class CreateWorkersTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->integer('status')->default(0);
+            $table->integer('type');
             $table->timestamps();
         });
     }

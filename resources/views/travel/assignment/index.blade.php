@@ -57,24 +57,22 @@
                                         <td><span class="text-success"> Viagem concluída </span></td>
                                         @break
                                         @endswitch
+                                        @if($travel->status==1)
                                         <td class="td-actions text-right">
-                                            @if (!$travel->finalized_at)
-                                                <a href="{{ route('travels.show', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar pedido">
-                                                    <i class="tim-icons icon-pencil"></i>
+
+                                                <a href="{{ route('travels.edit', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Concluir viagem">
+                                                    <i class="tim-icons icon-check-2"></i>
                                                 </a>
-                                            @else
-                                                <a href="{{ route('travels.show', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
-                                                    <i class="tim-icons icon-zoom-split"></i>
-                                                </a>
-                                            @endif
+
                                             <form action="{{ route('travels.destroy', $travel) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Devolver" onclick="confirm('Confirmar devolução?') ? this.parentElement.submit() : ''">
-                                                    <i class="tim-icons icon-simple-add"></i>
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cancelar viagem" onclick="confirm('Confirmar cancelamento?') ? this.parentElement.submit() : ''">
+                                                    <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

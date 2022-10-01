@@ -22,6 +22,7 @@
                             <thead class=" text-primary">
                                 <th>Nome</th>
                                 <th>Contacto</th>
+                                <th>Categoria</th>
                                 <th>Estado de ocupação</th>
                                 <th>Fazem</th>
 
@@ -36,30 +37,31 @@
 
                                             {{ $worker->phone }}
                                         </td>
-
-                                        @if($worker->status===0)
-
-                                      <td>  <span class="text-success">Livre</span> </td>
-
+                                        <td>{{ $worker->type == 1 ? 'Maqnta A' : 'Maqnta B' }}</td>
+                                        @if ($worker->status === 0)
+                                            <td> <span class="text-success">Livre</span> </td>
                                         @else
+                                            <td> <span class="text-primary">Ocupado</span> </td>
+                                        @endif
 
-                                         <td>  <span class="text-primary">Ocupado</span> </td>
-
-                                         @endif
-
-                                         <td> {{$worker->eta}}</td>
+                                        <td> {{ $worker->eta }}</td>
 
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('workers.show', $worker) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More Details">
+                                            <a href="{{ route('workers.show', $worker) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="More Details">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
-                                            <a href="{{ route('workers.edit', $worker) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit worker">
+                                            <a href="{{ route('workers.edit', $worker) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Edit worker">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </a>
-                                            <form action="{{ route('workers.destroy', $worker) }}" method="post" class="d-inline">
+                                            <form action="{{ route('workers.destroy', $worker) }}" method="post"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Delete worker" onclick="confirm('Estás seguro que quieres eliminar a este worker? Los registros de sus compras y Transactions no serán eliminados.') ? this.parentElement.submit() : ''">
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip"
+                                                    data-placement="bottom" title="Delete worker"
+                                                    onclick="confirm('Estás seguro que quieres eliminar a este worker? Los registros de sus compras y Transactions no serán eliminados.') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>

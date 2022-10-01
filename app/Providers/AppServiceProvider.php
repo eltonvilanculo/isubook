@@ -30,6 +30,23 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('pt');
         Blade::directive('money', function ($amount) {
             return "<?php echo   number_format($amount, 2) .' MT'; ?>";
-        });
+
+            });
+
+
+        Blade::directive('elton', function ($type) {
+
+    if( $type==1){
+    return "<?php echo Maqnta A  ?>";
+    }else if( $type==2) {
+    return "<?php echo Maqnta B ?>";
+    }else {
+    return "<?php echo Outro ?>";
     }
+
+
+
+    });
+
+}
 }
