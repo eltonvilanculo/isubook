@@ -7,7 +7,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Viagens realizadas mensalmente</h5>
+                            <h5 class="card-category">Inscrições de estudantes</h5>
                             <h2 class="card-title">Actividade anual</h2>
                         </div>
                         {{--  <div class="col-sm-6">
@@ -50,8 +50,8 @@
         <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Combôios sem actividade</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $pending }}</h3>
+                    <h5 class="card-category">Estudantes pendentes por inscrição</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-badge text-warning"></i> {{ $pending }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -63,8 +63,8 @@
         <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Combôios em actividade</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $done }}</h3>
+                    <h5 class="card-category">Estudantes inscritos</h5>
+                    <h3 class="card-title"><i class="tim-icons  icon-badge text-success"></i> {{ $done }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -76,8 +76,8 @@
         <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Maquinistas disponíveis </h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $overdue }}</h3>
+                    <h5 class="card-category">Taxa de reprovação geral </h5>
+                    <h3 class="card-title"><i class="tim-icons icon-book-bookmark text-success"></i> {{ $overdue }}%</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -90,8 +90,8 @@
           <div class="col-lg-3">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Maquinistas em actividade</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $overdue }}</h3>
+                    <h5 class="card-category">Taxa de aproveitamento geral</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-book-bookmark text-warning"></i> {{ $working }}%</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -108,10 +108,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Fila de viagens em progresso</h4>
+                            <h4 class="card-title">Fila de inscrições em progresso</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
+                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Inscrever estudante</a>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                                         Maquinista
                                     </th>
                                     <th>
-                                        Combôio
+                                        Estudante
                                     </th>
 
                                     <th>

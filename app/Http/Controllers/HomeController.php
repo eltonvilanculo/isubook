@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
 use App\PaymentMethod;
+use App\Train;
 use App\Travel;
+use App\Worker;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -41,9 +43,10 @@ class HomeController extends Controller
                 'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
                 'semesterexpenses'          => $this->getMonthlyTransactions()->get('semesterexpenses'),
                 'semesterincomes'           => $this->getMonthlyTransactions()->get('semesterincomes'),
-                'pending'=>count(Travel::where('status',0)->get()),
-                'done'=>count((Travel::where('status',1)->get())),
-                'overdue'=>(count(Travel::where('status',1)->get())),
+                'pending'=>count(Train::where('status',0)->get()),
+                'done'=>count((Train::where('status',1)->get())),
+                'overdue'=>(count(Worker::where('status',0)->get())),
+                'working'=>(count(Worker::where('status',1)->get())),
             ]);
         }else{
             return redirect()->route('sales.index');

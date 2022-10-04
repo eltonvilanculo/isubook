@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
         'provinces'=>'ProvincesController',
         'centrals'=>'CentralController',
         'routes'=>'RouteController',
-        'trains'=>'TrainController',
+        'estudantes'=>'EstudanteController',
         'workers' =>'WorkerController',
         'travels' =>'TravelController',
     ]);
@@ -54,7 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('sales', 'SaleController')->except(['edit', 'update']);
     Route::get('sales/{sale}/finalize', ['as' => 'sales.finalize', 'uses' => 'SaleController@finalize']);
+    Route::get('travels/{travel}/finalize', ['as' => 'travels.finalize', 'uses' => 'TravelController@finalize']);
     Route::get('sales/{sale}/product/add', ['as' => 'sales.product.add', 'uses' => 'SaleController@addproduct']);
+    Route::get('travels/{travel}/worker/add', ['as' => 'travels.worker.add', 'uses' => 'TravelController@addworker']);
+    Route::post('travels/{travel}/worker', ['as' => 'travel.worker.store', 'uses' => 'TravelController@assignWorker']);
     Route::get('sales/{sale}/product/{soldproduct}/edit', ['as' => 'sales.product.edit', 'uses' => 'SaleController@editproduct']);
     Route::post('sales/{sale}/product', ['as' => 'sales.product.store', 'uses' => 'SaleController@storeproduct']);
     Route::match(['put', 'patch'], 'sales/{sale}/product/{soldproduct}', ['as' => 'sales.product.update', 'uses' => 'SaleController@updateproduct']);

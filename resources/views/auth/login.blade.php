@@ -1,13 +1,14 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => 'Logística de Transportes Ferroviários(LTF)', 'contentClass' => 'login-page', 'section' => 'auth'])
+@extends('layouts.app', ['class' => 'login-page', 'page' => '', 'contentClass' => 'login-page', 'section' => 'auth'])
 
 @section('content')
     <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-        <form class="form" method="post" action="{{ route('login') }}">
+        <form class="form" method="post" action="{{ route('login') }}" >
             @csrf
 
             <div class="card card-login card-white">
-                <div class="card-header">
-                    <img src="{{ asset('assets') }}/img/book-solid.svg" alt="" width="24" height="24">
+              <img src="{{ asset('assets') }}/logo.jpg" >
+                <div class="card-header d-flex justify-content-center py-5">
+
 
                 </div>
                 <div class="card-body">
@@ -31,7 +32,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">Conecte-se</button>
+                    <button type="submit" href="" class="btn btn-success btn-lg btn-block mb-3">Conecte-se</button>
                     {{--  <div class="pull-left">
                         <h6>
                             <a href="{{ route('register') }}" class="link footer-link">Create Account</a>

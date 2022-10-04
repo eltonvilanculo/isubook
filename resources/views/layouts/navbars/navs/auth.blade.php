@@ -8,7 +8,9 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="#">{{ $page ?? __('Dashboard') }}</a>
+
+            {{--  <a class="navbar-brand" href="#">{{ $page ?? __('Dashboard') }}</a>  --}}
+            <a class="navbar-brand d-flex justify-content-center" href="#"> <img src="{{ asset('assets') }}/logos.svg"  width=56 height=56></a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-bar navbar-kebab"></span>

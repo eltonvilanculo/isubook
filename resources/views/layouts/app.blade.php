@@ -20,13 +20,15 @@
         <link href="{{ asset('assets') }}/css/white-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('assets') }}/css/theme.css" rel="stylesheet" />
         <link href="{{ asset('assets') }}/css/custom.css" rel="stylesheet" />
+
+
     </head>
     <body class="white-content {{ $class ?? '' }}">
         @auth()
             <div class="wrapper">
 
                     @include('layouts.navbars.sidebar')
-                
+
                 <div class="main-panel">
                     @include('layouts.navbars.navbar')
 
@@ -56,6 +58,10 @@
         <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
         <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+              <link rel="stylesheet" type="text/css" href="{{ asset('DataTables') }}/extra/css/dataTables.bootstrap5.min.css"/>
+              <link rel="stylesheet" type="text/css" href="{{ asset('DataTables') }}/datatables.min.css"/>
+
+        <script type="text/javascript" src="{{ asset('DataTables') }}/datatables.min.js"></script>
         <!-- Chart JS -->
         {{-- <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script> --}}
         <!--  Notifications Plugin    -->
@@ -71,6 +77,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk7IIcaCGfdQN-NaP3WHBpQ-h
         <script>
             $(document).ready(function() {
                 $().ready(function() {
+$('#table').DataTable( {
+        language: {
+            url: "{{ asset('DataTables') }}/extra/plugin/pt-PT.json"
+        }
+    });
+
+
                     $sidebar = $('.sidebar');
                     $navbar = $('.navbar');
                     $main_panel = $('.main-panel');
@@ -177,6 +190,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk7IIcaCGfdQN-NaP3WHBpQ-h
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.js"></script>
+
         @stack('js')
     </body>
 </html>

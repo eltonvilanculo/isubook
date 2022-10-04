@@ -14,7 +14,7 @@
                 <li>
                     <a data-toggle="collapse" href="#inventory" {{ $section == 'inventory' ? 'aria-expanded=true' : '' }}>
                         <i class="tim-icons icon-paper"></i>
-                        <span class="nav-link-text">Logística</span>
+                        <span class="nav-link-text">Registro académico</span>
                         <b class="caret mt-1"></b>
                     </a>
 
@@ -28,27 +28,27 @@
                             </li>
                             <li @if ($pageSlug == 'routes') class="active " @endif>
                                 <a href="{{ route('routes.index') }}">
-                                    <i class="tim-icons icon-square-pin"></i>
-                                    <p>Rotas</p>
+                                    <i class="tim-icons icon-credit-card"></i>
+                                    <p>Propinas</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'trains') class="active " @endif>
-                                <a href="{{ route('trains.index') }}">
-                                    <i class="tim-icons icon-bus-front-12"></i>
-                                    <p>Combôios</p>
+                            <li @if ($pageSlug == 'estudantes') class="active " @endif>
+                                <a href="{{ route('estudantes.index') }}">
+                                    <i class="tim-icons icon-badge"></i>
+                                    <p>Estudantes</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'workers') class="active " @endif>
                                 <a href="{{ route('workers.index') }}">
-                                    <i class="tim-icons icon-badge"></i>
-                                    <p>Maquinistas</p>
+                                    <i class="tim-icons icon-book-bookmark"></i>
+                                    <p>Disciplinas</p>
                                 </a>
                             </li>
 
                <li @if ($pageSlug == 'travels') class="active " @endif>
                                 <a href="{{ route('travels.index') }}">
                                     <i class="tim-icons icon-vector"></i>
-                                    <p>Atribuições</p>
+                                    <p>Inscrições</p>
                                 </a>
                             </li>
 

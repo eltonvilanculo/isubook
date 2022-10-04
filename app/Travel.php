@@ -14,7 +14,7 @@ class Travel extends Model
     }
 
     public function workers() {
-        return $this->hasMany('App\Worker');
+        return $this->hasMany('App\Assignment');
     }
     public function worker() {
         return $this->belongsTo('App\Worker');
