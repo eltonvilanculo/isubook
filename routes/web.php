@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
         'centrals'=>'CentralController',
         'routes'=>'RouteController',
         'estudantes'=>'EstudanteController',
-        'workers' =>'WorkerController',
+        'disciplinas' =>'DisciplinaController',
         'travels' =>'TravelController',
     ]);
 

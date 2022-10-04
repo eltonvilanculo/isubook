@@ -38,8 +38,8 @@
                                     <p>Estudantes</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'workers') class="active " @endif>
-                                <a href="{{ route('workers.index') }}">
+                            <li @if ($pageSlug == 'disciplinas') class="active " @endif>
+                                <a href="{{ route('disciplinas.index') }}">
                                     <i class="tim-icons icon-book-bookmark"></i>
                                     <p>Disciplinas</p>
                                 </a>
