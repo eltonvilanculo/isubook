@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Disciplina;
+use App\Precedencia;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class DisciplinaController extends Controller
@@ -41,7 +43,8 @@ class DisciplinaController extends Controller
     public function create()
     {
         //
-        return view('registro.disciplina.create');
+        $disciplinas = Disciplina::all();
+        return view('registro.disciplina.create',compact('disciplinas'));
     }
 
     /**
@@ -53,11 +56,17 @@ class DisciplinaController extends Controller
     public function store(Request $request,Disciplina $disciplina)
     {
         //
-        $this->validate($request,[
+     $this->validate($request,[
             'nome'=>'unique:disciplinas',
             'abr'=>'unique:disciplinas'
         ]);
-        $disciplina->create($request->all());
+       $data = $request->all();
+
+        $newDisc = $disciplina->create($request->all());
+
+        if($data['prec_id']){
+            Precedencia::create(['prec_id' => $data['prec_id'],'ant_id'=>$newDisc->id]);
+        }
 
         return redirect()
             ->route('disciplinas.index')
@@ -73,6 +82,17 @@ class DisciplinaController extends Controller
     public function show(Disciplina $disciplina)
     {
         //
+
+
+        $precedencias  =  DB::table('precedencias')
+                        ->join('disciplinas as prec','prec.id','=','precedencias.prec_id')
+                        ->join('disciplinas as ant','ant.id','=','precedencias.ant_id')
+                         ->select('precedencias.id', 'prec.nome','prec.id as prec_id')
+                         ->where('ant.id', '=',$disciplina->id)
+                         ->get();
+
+
+        return view ('registro.disciplina.show',compact('disciplina','precedencias'));
     }
 
     /**
@@ -123,4 +143,22 @@ class DisciplinaController extends Controller
             ->route('disciplinas.index')
             ->withStatus('Removido !');
     }
+
+    public function addprecedencia(Disciplina $disciplina){
+
+        $disciplinas  =  Disciplina::all()->except($disciplina->id);
+        return view('registro.disciplina.addprecedence',compact('disciplinas','disciplina'));
+    }
+    
+    public function storeprecedencia(Request $request,Disciplina $disciplina){
+
+
+            Precedencia::create(['prec_id' => $request->prec_id,'ant_id'=>$disciplina->id]);
+
+
+        return redirect()
+            ->route('disciplinas.show',$disciplina)
+            ->withStatus('Precedência criada com sucesso!');
+    }
+
 }

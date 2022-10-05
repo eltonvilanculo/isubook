@@ -32,12 +32,12 @@
                                         <td>{{ $disciplina->nome }}</td>
 
                                         <td>{{ $disciplina->abr }}</td>
-                                    
+
                                         <td>{{ $disciplina->desde }}</td>
 
 
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('products.show', $disciplina) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Detalhes do disciplina">
+                                            <a href="{{ route('disciplinas.show', $disciplina) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Detalhes do disciplina">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
                                             <a href="{{ route('disciplinas.edit', $disciplina) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar disciplina">

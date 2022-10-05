@@ -8,36 +8,24 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Nova disciplina</h3>
+                                <h3 class="mb-0">{{ $disciplina->nome }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('disciplinas.index') }}" class="btn btn-sm btn-primary">De volta à
+                                <a href="{{ route('disciplinas.show',$disciplina) }}" class="btn btn-sm btn-primary">De volta à
                                     lista</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('disciplinas.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('disciplina.precedencia',$disciplina) }}" autocomplete="off">
                             @csrf
 
-                            <h6 class="heading-small text-muted mb-4">Dados do disciplina</h6>
+
                             <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">Nome</label>
-                                    <input type="text" name="nome" id="input-name"
-                                        class="form-control form-control-alternative{{ $errors->has('nome') ? ' is-invalid' : '' }}"
-                                        placeholder="" value="{{ old('nome') }}" required autofocus>
-                                    @include('alerts.feedback', ['field' => 'nome'])
-                                </div>
-                                <div class="form-group{{ $errors->has('abr') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">Abreviatura</label>
-                                    <input type="text" name="abr" id="input-abr"
-                                        class="form-control form-control-alternative{{ $errors->has('abr') ? ' is-invalid' : '' }}"
-                                        placeholder="" value="{{ old('abr') }}" required autofocus>
-                                    @include('alerts.feedback', ['field' => 'abr'])
-                                </div>
+
+
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-name">Precendência</label>
+                                    <label class="form-control-label" for="input-name">Precendência com : </label>
                                     <select name="prec_id" id="input-prec_id"
                                         class="form-select form-control-alternative{{ $errors->has('prec_id') ? ' is-invalid' : '' }}">
 
@@ -56,7 +44,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">Salvar</button>
+                                    <button type="submit" class="btn btn-success mt-4">Criar precedência</button>
                                 </div>
                             </div>
                         </form>

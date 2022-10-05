@@ -1,33 +1,34 @@
-@extends('layouts.app', ['page' => 'Informações do item', 'pageSlug' => 'products', 'section' => 'inventory'])
+@extends('layouts.app', ['page' => 'Informações da disciplina', 'pageSlug' => 'disciplinas', 'section' => 'disciplinas'])
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Informação do item</h4>
+                    <h4 class="card-title">Informação da disciplina</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Categoria</th>
                             <th>Nome</th>
-                            <th>Stock</th>
-                            <th>Stock mínimo</th>
-
-                            <th>Pedidos totais</th>
+                            <th>Abreviatura</th>
+                            <th>Precendências</th>
+                            <th></th>
 
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $product->id }}</td>
-                                <td><a href="{{ route('categories.show', $product->category) }}">{{ $product->category->name }}</a></td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->stock }}</td>
-                                <td>{{ $product->stock_defective }}</td>
+                                <td>{{ $disciplina->id }}</td>
+                                <td>{{ $disciplina->nome }}</td>
+                                <td>{{ $disciplina->abr }}</td>
+                                <td>{{ count($precedencias) }}</td>
+                                <td> <a href="{{ route('disciplina.precedencia', $disciplina) }}" class="btn btn-link"
+                                        data-toggle="tooltip" data-placement="bottom" title="Adicionar precedencia">
+                                        <i class="tim-icons icon-pencil"></i>
+                                    </a></td>
 
-                                <td>{{ $product->solds->sum('qty') }}</td>
+
 
                             </tr>
                         </tbody>
@@ -41,29 +42,24 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">últimos pedidos</h4>
+                    <h4 class="card-title">Lista de Precendências de ({{ $disciplina->nome }})</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
-                            <th>Data</th>
-                            <th>ID do pedido</th>
-                            <th>Quantidade</th>
-
-                            <th></th>
+                            <th>ID</th>
+                            <th>Disciplina Precedente</th>
                         </thead>
                         <tbody>
-                            @foreach ($solds as $sold)
+                            @foreach ($precedencias as $precedencia)
                                 <tr>
-                                    <td>{{ date('d-m-y', strtotime($sold->created_at)) }}</td>
-                                    <td><a href="{{ route('sales.show', $sold->sale_id) }}">{{ $sold->sale_id }}</a></td>
-                                    <td>{{ $sold->qty }}</td>
-
-                                    <td class="td-actions text-right">
-                                        <a href="{{ route('sales.show', $sold->sale_id) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
-                                            <i class="tim-icons icon-zoom-split"></i>
-                                        </a>
+                                    <td>{{ $precedencia->id }}</td>
+                                    <td><a
+                                            href="{{ route('disciplinas.show', $precedencia->prec_id) }}">{{ $precedencia->nome }}</a>
                                     </td>
+
+
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -72,6 +68,4 @@
             </div>
         </div>
     </div>
-
- 
 @endsection

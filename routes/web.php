@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('inventory/receipts/{receipt}/product/{receivedproduct}', ['as' => 'receipts.product.destroy', 'uses' => 'ReceiptController@destroyproduct']);
 
     Route::resource('sales', 'SaleController')->except(['edit', 'update']);
+    Route::get('disciplinas/{disciplina}/precedencia', ['as' => 'disciplina.precedencia', 'uses' => 'DisciplinaController@addprecedencia']);
+    Route::post('disciplinas/{disciplina}/precedencia', ['as' => 'disciplina.precedencia', 'uses' => 'DisciplinaController@storeprecedencia']);
     Route::get('sales/{sale}/finalize', ['as' => 'sales.finalize', 'uses' => 'SaleController@finalize']);
     Route::get('travels/{travel}/finalize', ['as' => 'travels.finalize', 'uses' => 'TravelController@finalize']);
     Route::get('sales/{sale}/product/add', ['as' => 'sales.product.add', 'uses' => 'SaleController@addproduct']);
