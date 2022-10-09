@@ -180,7 +180,7 @@
                         </a>
                         <a href="{{ route('transactions.create', ['type' => 'expense']) }}"
                             class="btn btn-sm btn-primary">Despesa</a>
-                        <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Empréstimo</a>
+                        <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Empréstimo</a>
                         <a href="{{ route('transfer.create') }}" class="btn btn-sm btn-primary">Transferência</a>
                     </div>
                 </div>

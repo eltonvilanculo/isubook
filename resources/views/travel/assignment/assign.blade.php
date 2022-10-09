@@ -27,7 +27,7 @@
                                     <select name="worker_id" id="input-worker" class="form-select form-control-alternative{{ $errors->has('worker_id') ? ' is-invalid' : '' }}" required onchange="productChange()">
                                         @foreach ($workers as $worker)
 
-                                                <option value="{{$worker['id']}}">{{ $worker->name }}</option>
+                                                <option value="{{$worker['id']}}">{{ $worker->name }} ({{ $worker->type==1?'A':'B' }})</option>
 
                                         @endforeach
                                     </select>
