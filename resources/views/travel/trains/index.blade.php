@@ -23,7 +23,7 @@
                                 <th scope="col">Rota</th>
                                 <th scope="col">Designação</th>
                                 <th scope="col">Vagões</th>
-                                <th scope="col"></th>
+                                {{--  <th scope="col"></th>  --}}
                             </thead>
                             <tbody>
                                 @foreach ($trains as $train)
@@ -31,10 +31,10 @@
                                         <td><a href="{{ route('routes.show', $train->route) }}">{{ $train->route->name }}</a></td>
                                         <td>{{ $train->name }}</td>
 
-                                        <td>{{ $train->vagon }}</td>
+                                        <td>{{ $train->vagons }}</td>
                                         {{--  <td>{{ $product->stock_defective }}</td>  --}}
 
-                                        <td class="td-actions text-right">
+                                        {{--  <td class="td-actions text-right">
                                             <a href="{{ route('products.show', $train) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais detalhes">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
@@ -48,7 +48,7 @@
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td>  --}}
                                     </tr>
                                 @endforeach
                             </tbody>

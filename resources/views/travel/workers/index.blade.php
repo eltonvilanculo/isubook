@@ -26,7 +26,7 @@
                                 <th>Estado de ocupação</th>
                                 <th>Fazem</th>
 
-                                <th></th>
+                                {{--  <th></th>  --}}
                             </thead>
                             <tbody>
                                 @foreach ($workers as $worker)
@@ -46,7 +46,7 @@
 
                                         <td> {{ $worker->eta }}</td>
 
-                                        <td class="td-actions text-right">
+                                        {{--  <td class="td-actions text-right">
                                             <a href="{{ route('workers.show', $worker) }}" class="btn btn-link"
                                                 data-toggle="tooltip" data-placement="bottom" title="More Details">
                                                 <i class="tim-icons icon-zoom-split"></i>
@@ -65,7 +65,7 @@
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td>  --}}
                                     </tr>
                                 @endforeach
                             </tbody>
