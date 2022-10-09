@@ -6,8 +6,8 @@
             @csrf
 
             <div class="card card-login card-white">
-                <div class="card-header">
-                    <img src="{{ asset('assets') }}/img/book-solid.svg" alt="" width="24" height="24">
+                <div class="card-header d-flex justify-content-center">
+                    <img src="{{ asset('assets') }}/cfm-logo-.png" class="py-5">
 
                 </div>
                 <div class="card-body">
@@ -17,7 +17,8 @@
                                 <i class="tim-icons icon-email-85"></i>
                             </div>
                         </div>
-                        <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email">
+                        <input type="email" name="email"
+                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
                     <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -26,7 +27,8 @@
                                 <i class="tim-icons icon-lock-circle"></i>
                             </div>
                         </div>
-                        <input type="password" placeholder="Chave" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
+                        <input type="password" placeholder="Chave" name="password"
+                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                         @include('alerts.feedback', ['field' => 'password'])
                     </div>
                 </div>

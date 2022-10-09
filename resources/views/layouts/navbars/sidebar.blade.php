@@ -20,12 +20,12 @@
 
                     <div class="collapse {{ $section == 'inventory' ? 'show' : '' }}" id="inventory">
                         <ul class="nav pl-4">
-                            <li @if ($pageSlug == 'istats') class="active " @endif>
+                            {{--  <li @if ($pageSlug == 'istats') class="active " @endif>
                                 <a href="{{ route('inventory.stats') }}">
                                     <i class="tim-icons icon-chart-pie-36"></i>
                                     <p>Estatísticas</p>
                                 </a>
-                            </li>
+                            </li>  --}}
                             <li @if ($pageSlug == 'routes') class="active " @endif>
                                 <a href="{{ route('routes.index') }}">
                                     <i class="tim-icons icon-square-pin"></i>
