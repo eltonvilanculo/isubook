@@ -111,7 +111,7 @@
                             <h4 class="card-title">Fila de viagens em progresso</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
+                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                         </a>
                         <a href="{{ route('transactions.create', ['type' => 'expense']) }}"
                             class="btn btn-sm btn-primary">Despesa</a>
-                        <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Empréstimo</a>
+                        <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Empréstimo</a>
                         <a href="{{ route('transfer.create') }}" class="btn btn-sm btn-primary">Transferência</a>
                     </div>
                 </div>
