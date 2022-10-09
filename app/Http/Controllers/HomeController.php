@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Assignment;
 use App\Sale;
 use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
 use App\PaymentMethod;
+use App\Train;
 use App\Travel;
+use App\Worker;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -32,7 +36,7 @@ class HomeController extends Controller
                 'monthlybalance'            => $monthlyBalance,
                 'monthlybalancebymethod'    => $monthlyBalanceByMethod,
                 'lasttransactions'          => Transaction::latest()->limit(20)->get(),
-                'unfinishedsales'           => Sale::where('finalized_at', null)->get(),
+                'unfinishedtravels'           => Travel::where('status', 3)->get(),
                 'anualsales'                => $anualsales,
                 'anualclients'              => $anualclients,
                 'anualproducts'             => $anualproducts,
@@ -41,9 +45,11 @@ class HomeController extends Controller
                 'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
                 'semesterexpenses'          => $this->getMonthlyTransactions()->get('semesterexpenses'),
                 'semesterincomes'           => $this->getMonthlyTransactions()->get('semesterincomes'),
-                'pending'=>count(Travel::where('status',0)->get()),
-                'done'=>count((Travel::where('status',1)->get())),
+                'pending'=>count(Train::where('status',0)->get()),
+                'done'=>count((Train::where('status',2)->get())),
                 'overdue'=>(count(Travel::where('status',1)->get())),
+                'availableWorker'=>(count(Worker::where('status',0)->get())),
+                'busyWorker'=>(count(Worker::where('status',1)->get()))
             ]);
         }else{
             return redirect()->route('sales.index');
@@ -69,7 +75,7 @@ class HomeController extends Controller
     {
         $sales = [];
         foreach(range(1, 12) as $i) {
-            $monthlySalesCount = Sale::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
+            $monthlySalesCount = Travel::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
 
             array_push($sales, $monthlySalesCount);
         }
@@ -80,7 +86,7 @@ class HomeController extends Controller
     {
         $clients = [];
         foreach(range(1, 12) as $i) {
-            $monthclients = Sale::selectRaw('count(distinct client_id) as total')
+            $monthclients = Travel::selectRaw('count(distinct train_id) as total')
                 ->whereYear('created_at', Carbon::now()->year)
                 ->whereMonth('created_at', $i)
                 ->first();
@@ -94,7 +100,7 @@ class HomeController extends Controller
     {
         $products = [];
         foreach(range(1, 12) as $i) {
-            $monthproducts = SoldProduct::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('qty');
+            $monthproducts = Assignment::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('id');
 
             array_push($products, $monthproducts);
         }
@@ -114,10 +120,10 @@ class HomeController extends Controller
         foreach (range(1, 6) as $i) {
             array_push($lastmonths, $actualmonth->shortMonthName);
 
-            $incomes = Transaction::where('type', 'income')
+            $incomes = Travel::where('status', 2)
                 ->whereYear('created_at', $actualmonth->year)
                 ->WhereMonth('created_at', $actualmonth->month)
-                ->sum('amount');
+                ->count('id');
 
             $semesterincomes += $incomes;
             $lastincomes = round($incomes).','.$lastincomes;

@@ -77,7 +77,7 @@
             <div class="card card-chart">
                 <div class="card-header">
                     <h5 class="card-category">Maquinistas disponíveis </h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $overdue }}</h3>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-success"></i> {{ $availableWorker }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -91,7 +91,7 @@
             <div class="card card-chart">
                 <div class="card-header">
                     <h5 class="card-category">Maquinistas em actividade</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $overdue }}</h3>
+                    <h3 class="card-title"><i class="tim-icons icon-bus-front-12 text-warning"></i> {{ $busyWorker }}</h3>
                 </div>
                 <div class="card-body" style="display: none;">
                     <div class="chart-area">
@@ -124,10 +124,10 @@
                                         Data
                                     </th>
                                     <th>
-                                        Maquinista
+                                        Combôio
                                     </th>
                                     <th>
-                                        Combôio
+                        Maquinistas
                                     </th>
 
                                     <th>
@@ -136,17 +136,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($unfinishedsales as $sale)
+                                @foreach ($unfinishedtravels as $travel)
                                     <tr>
-                                        <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
+                                        <td>{{ date('d-m-y', strtotime($travel->created_at)) }}</td>
                                         <td><a
-                                                href="">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a>
+                                                href="">{{ $travel->train->name }}</a>
                                         </td>
-                                        <td>{{ $sale->products->count() }}</td>
+                                        <td>{{ $travel->workers->count() }}</td>
 
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link"
-                                                data-toggle="tooltip" data-placement="bottom" title="Ver pedido">
+                                            <a href="{{ route('travels.show', ['travel' => $travel]) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Ver viagem">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
                                         </td>

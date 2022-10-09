@@ -19,60 +19,70 @@
                     <div class="">
                         <table class="table">
                             <thead>
-                                <th>Maquinista</th>
+
                                 <th>Comboio</th>
                                 <th>Gestor</th>
                                 <th>Data de criação</th>
-                                <th>Previsão de término</th>
+                                <th>Previsão de partida</th>
+                                <th>Previsão de chegada</th>
                                 <th>Estado</th>
                                 <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($travels as $travel)
-
                                     <tr>
 
 
-                                        {{--  <td><a href="{{route('clients.show',$travel->client)}}">{{ $travel->client->name }}<br>{{ $travel->client->document_type }}-{{ $travel->client->document_id }}</a></td>  --}}
-                                        <td>{{ $travel->worker->name }}</td>
                                         <td>{{ $travel->train->name }}</td>
                                         <td>{{ Auth::user()->name }}</td>
-                                        <td>{{ date('d-m-y', strtotime($travel->created_at))}}</td>
-                                        <td>{{$travel->end_time}}</td>
+                                        <td>{{ date('d-m-y', strtotime($travel->created_at)) }}</td>
+                                        <td>{{ $travel->start_at }}</td>
+                                        <td>{{ $travel->end_at }}</td>
                                         @switch($travel->status)
+                                            @case(1)
+                                                <td>Em progresso</td>
+                                            @break
 
-                                        @case(0)
+                                            @case(2)
+                                                <td>Finalizada</td>
+                                            @break
 
+                                            @case(3)
+                                                <td>Em atribuição (pendente)</td>
+                                            @break
 
-                                        <td> <span class="text-danger">Viagem cancelada </span></td>
-                                        @break
-                                        @case(1)
-
-
-                                        <td><span class="text-warning">Viagem em progresso</span></td>
-                                        @break
-                                        @case(2)
-
-
-                                        <td><span class="text-success"> Viagem concluída </span></td>
-                                        @break
+                                            @case(0)
+                                                <td>Cancelada</td>
+                                            @break
                                         @endswitch
-                                        @if($travel->status==1)
+
+
                                         <td class="td-actions text-right">
 
-                                                <a href="{{ route('travels.edit', ['travel' => $travel]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Concluir viagem">
-                                                    <i class="tim-icons icon-check-2"></i>
-                                                </a>
+                                            <a href="{{ route('travels.show', $travel) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Ver atribuições">
+                                                <i class="tim-icons icon-zoom-split"></i>
+                                            </a>
+                                            @if($travel->status==1)
+                                            <a href="{{ route('travels.edit', ['travel' => $travel]) }}"
+                                                class="btn btn-link" data-toggle="tooltip" data-placement="bottom"
+                                                title="Concluir viagem">
+                                                <i class="tim-icons icon-check-2"></i>
+                                            </a>
 
-                                            <form action="{{ route('travels.destroy', $travel) }}" method="post" class="d-inline">
+                                            <form action="{{ route('travels.destroy', $travel) }}" method="post"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cancelar viagem" onclick="confirm('Confirmar cancelamento?') ? this.parentElement.submit() : ''">
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip"
+                                                    data-placement="bottom" title="Cancelar viagem"
+                                                    onclick="confirm('Confirmar cancelamento?') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>
+                                            @endif
                                         </td>
-                                        @endif
+
                                     </tr>
                                 @endforeach
                             </tbody>

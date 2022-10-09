@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use App\Train;
 use App\Travel;
 use App\Worker;
@@ -32,10 +33,10 @@ class TravelController extends Controller
     {
         //
 
-        $workers = Worker::where('status',0)->get();
-        $trains = Train::all();
+        // $workers = Worker::where('status',0)->get();
+        $trains = Train::where('status',0)->get();
 
-        return view('travel.assignment.create', compact('workers', 'trains'));
+        return view('travel.assignment.create', compact('trains'));
     }
 
     /**
@@ -44,22 +45,47 @@ class TravelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Travel $travel)
+    public function store(Request $request,Travel $model)
     {
         //
 
-        $worker =Worker::findOrFail($request->worker_id);
-        $worker->status =  1 ;
-     
-        if($worker->save()){
+        // $worker =Worker::findOrFail($request->worker_id);
+        // $worker->status =  1 ;
+        $train  =  Train::findOrFail($request->train_id);
+        $train->status =  1 ;
 
-            $travel->create($request->all());
-        }
+        $train->save();
+
+          $travel =   $model->create($request->all());
+
         return redirect()
-            ->route('travels.index')
-            ->withStatus('Viagem registada com sucesso!');
+        ->route('travels.show', ['travel' => $travel->id])
+        ->withStatus('Adicione Maquinistas ao comboio selecionado !');
 
 
+    }
+
+    public function addworker(Travel $travel)
+    {
+        $workers = Worker::where('status', 0)->get();
+
+
+        return view('travel.assignment.assign', compact('travel', 'workers'));
+    }
+
+    public function assignWorker(Request $request, Travel $travel, Assignment $assignment)
+    {
+
+
+        $data = $request->all();
+
+        $data['travel_id']= $travel->id;
+
+        $assignment->create($data);
+
+        return redirect()
+            ->route('travels.show', ['travel' => $travel])
+            ->withStatus('Maquinista relacionado a viagem com sucesso');
     }
 
     /**
@@ -71,6 +97,7 @@ class TravelController extends Controller
     public function show(Travel $travel)
     {
         //
+        return view('travel.assignment.show', ['travel' => $travel]);
     }
 
     /**
@@ -84,10 +111,15 @@ class TravelController extends Controller
         //
 
         $travel->status = 2;
+
+        foreach ($travel->workers as $worker){
+            $worker->worker->status= 0 ;
+            $worker->worker->save();
+
+        }
+
+
         $travel->save();
-        $worker = Worker::findOrFail($travel->worker_id);
-        $worker->status = 0;
-        $worker->save();
         return redirect()
         ->route('travels.index')
         ->withStatus('Viagem conculída com sucesso!');
@@ -116,14 +148,37 @@ class TravelController extends Controller
     {
         //
 
+
+
+        foreach ($travel->workers as $worker){
+            $worker->worker->status= 0 ;
+            $worker->worker->save();
+
+        }
         $travel->status = 0;
-        $worker = Worker::findOrFail($travel->worker_id);
-        $worker->status = 0;
-        $worker->save();
+
         $travel->save();
 
         return redirect()
         ->route('travels.index')
         ->withStatus('Viagem cancelada com sucesso!');
+    }
+
+
+    public function finalize(Travel $travel){
+        $travel->status =  1 ;//progress;
+        $travel->train->status = 2; //traveling;
+        $travel->train->save();
+
+        foreach($travel->workers as $worker) {
+
+            $worker->worker->status = 1;
+
+            $worker->worker->save();
+        }
+        $travel->save();
+        return redirect()
+        ->route('travels.index')
+        ->withStatus('Viagem iniciada com sucesso!');
     }
 }
