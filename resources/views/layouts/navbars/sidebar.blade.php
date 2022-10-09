@@ -5,12 +5,12 @@
 
 
             @if (Auth::user()->type == 0)
-               <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-bar-32"></i>
-                    <p>Relatórios de actividades</p>
-                </a>
-            </li>
+                <li @if ($pageSlug == 'dashboard') class="active " @endif>
+                    <a href="{{ route('home') }}">
+                        <i class="tim-icons icon-chart-bar-32"></i>
+                        <p>Relatórios de actividades</p>
+                    </a>
+                </li>
                 <li>
                     <a data-toggle="collapse" href="#inventory" {{ $section == 'inventory' ? 'aria-expanded=true' : '' }}>
                         <i class="tim-icons icon-paper"></i>
@@ -45,8 +45,8 @@
                                 </a>
                             </li>
 
-               <li @if ($pageSlug == 'travels') class="active " @endif>
-                                <a href="{{ route('travels.index') }}">
+                            <li @if ($pageSlug == 'inscricoes') class="active " @endif>
+                                <a href="{{ route('inscricoes.index') }}">
                                     <i class="tim-icons icon-vector"></i>
                                     <p>Inscrições</p>
                                 </a>
@@ -80,8 +80,6 @@
         </ul>
     </div>
     </li>
-
-
     @endif
 
 

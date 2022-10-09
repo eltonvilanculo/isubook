@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
         'estudantes'=>'EstudanteController',
         'disciplinas' =>'DisciplinaController',
         'travels' =>'TravelController',
+        'inscricoes' =>'InscricaoController',
     ]);
 
     Route::resource('transactions', 'TransactionController')->except(['create', 'show']);
