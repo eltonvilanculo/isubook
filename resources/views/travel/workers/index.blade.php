@@ -18,7 +18,7 @@
                     @include('alerts.success')
 
                     <div class="">
-                        <table class="table tablesorter " id="">
+                        <table class="table tablesorter " id="table">
                             <thead class=" text-primary">
                                 <th>Nome</th>
                                 <th>Contacto</th>
