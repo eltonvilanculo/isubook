@@ -111,7 +111,7 @@
                             <h4 class="card-title">Fila de viagens em progresso</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
+                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Atribuir Maquinista</a>
                         </div>
                     </div>
                 </div>
