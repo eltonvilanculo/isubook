@@ -23,6 +23,7 @@
                                 <th scope="col">Rota</th>
                                 <th scope="col">Designação</th>
                                 <th scope="col">Vagões</th>
+                                <th scope="col">Estado</th>
                                 {{--  <th scope="col"></th>  --}}
                             </thead>
                             <tbody>
@@ -32,6 +33,23 @@
                                         <td>{{ $train->name }}</td>
 
                                         <td>{{ $train->vagons }}</td>
+
+                                        @switch($train->status)
+
+                                            @case (0)
+                                             <td>Disponível</td>
+                                             @break
+                                            @case (1)
+                                             <td>Em vias de atribuição</td>
+                                             @break
+                                            @case (2)
+                                             <td>Em viagem</td>
+                                             @break
+
+                                        @endswitch
+
+
+
                                         {{--  <td>{{ $product->stock_defective }}</td>  --}}
 
                                         {{--  <td class="td-actions text-right">
