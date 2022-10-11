@@ -1,6 +1,6 @@
 
 
-@extends('layouts.app', ['page' => 'Atribuir ', 'pageSlug' => 'travels', 'section' => 'transactions'])
+@extends('layouts.app', ['page' => 'Atribuir ', 'pageSlug' => 'inscricoes', 'section' => 'transactions'])
 
 @section('content')
         <div class="row">
@@ -12,26 +12,27 @@
                                 <h3 class="mb-0">Atribuir </h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('travels.index') }}" class="btn btn-sm btn-primary">De volta à lista</a>
+                                <a href="{{ route('inscricoes.index') }}" class="btn btn-sm btn-primary">De volta à lista</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('travel.worker.store',$travel) }}" autocomplete="off">
+                        <form method="post" action="{{ route('inscricoes.disciplina.store',$inscricao) }}" autocomplete="off">
                             @csrf
 
                             <div class="pl-lg-4">
 
-                                <div class="form-group{{ $errors->has('worker_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-product">Maquinista</label>
-                                    <select name="worker_id" id="input-worker" class="form-select form-control-alternative{{ $errors->has('worker_id') ? ' is-invalid' : '' }}" required onchange="productChange()">
-                                        @foreach ($workers as $worker)
+                                <div class="form-group{{ $errors->has('disciplina_id') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-product">Disciplina</label>
+                                    <select name="disciplina_id" id="input-disciplina" class="form-select form-control-alternative{{ $errors->has('disciplina_id') ? ' is-invalid' : '' }}" required onchange="productChange()">
+                                        @foreach ($disciplinas as $disciplina)
 
-                                                <option value="{{$worker['id']}}">{{ $worker->name }}</option>
+                                                <option value="{{$disciplina['id']}}">{{ $disciplina->nome }}</option>
 
                                         @endforeach
                                     </select>
-                                    @include('alerts.feedback', ['field' => 'worker_id'])
+                                    <input type="hidden" name="inscricao_id" value="{{$inscricao['id']}}" />
+                                    @include('alerts.feedback', ['field' => 'disciplina_id'])
 
                                 </div>
 

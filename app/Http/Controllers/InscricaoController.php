@@ -153,7 +153,10 @@ class InscricaoController extends Controller
 
       $data = $request->all();
 
-      $data['inscricao_id']= $inscricao->id;
+      $inscricao = inscricao::findOrFail($data['inscricao_id']);
+
+
+
 
       $matricula->create($data);
 
@@ -161,4 +164,6 @@ class InscricaoController extends Controller
           ->route('inscricoes.show',$inscricao)
           ->withStatus('Cadeira associada ao estudante');
   }
+
+
 }

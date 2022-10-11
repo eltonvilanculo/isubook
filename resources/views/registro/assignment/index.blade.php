@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Gestão de pedidos', 'pageSlug' => 'travels', 'section' => 'transactions'])
+@extends('layouts.app', ['page' => 'Gestão de pedidos', 'pageSlug' => 'inscricoes', 'section' => 'transactions'])
 
 @section('content')
     @include('alerts.success')
@@ -8,10 +8,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Gestão de Atribuições</h4>
+                            <h4 class="card-title">Gestão de Matrículas</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('travels.create') }}" class="btn btn-sm btn-primary">Nova atribuição</a>
+                            <a href="{{ route('inscricoes.create') }}" class="btn btn-sm btn-primary">Nova matrícula</a>
                         </div>
                     </div>
                 </div>
@@ -20,62 +20,46 @@
                         <table class="table">
                             <thead>
 
-                                <th>Comboio</th>
+                                <th>ID</th>
+                                <th>Estudante</th>
                                 <th>Gestor</th>
-                                <th>Data de criação</th>
-                                <th>Previsão de partida</th>
-                                <th>Previsão de chegada</th>
+                                <th>Data</th>
                                 <th>Estado</th>
+
                                 <th></th>
                             </thead>
                             <tbody>
-                                @foreach ($travels as $travel)
+                                @foreach ($inscricoes as $inscricao)
                                     <tr>
 
 
-                                        {{--  <td><a href="{{route('clients.show',$travel->client)}}">{{ $travel->client->name }}<br>{{ $travel->client->document_type }}-{{ $travel->client->document_id }}</a></td>  --}}
+                                        {{--  <td><a href="{{route('clients.show',$inscricao->client)}}">{{ $inscricao->client->name }}<br>{{ $inscricao->client->document_type }}-{{ $inscricao->client->document_id }}</a></td>  --}}
 
-                                        <td>{{ $travel->train->name }}</td>
+                                        <td>{{ $inscricao->id}}</td>
+                                        <td>{{ $inscricao->estudante->nome }}</td>
                                         <td>{{ Auth::user()->name }}</td>
-                                        <td>{{ date('d-m-y', strtotime($travel->created_at)) }}</td>
-                                        <td>{{ $travel->start_at }}</td>
-                                        <td>{{ $travel->end_at }}</td>
+                                        <td>{{ date('d-m-y', strtotime($inscricao->created_at)) }}</td>
+                                        <td>{{ $inscricao->estado }}</td>
 
 
-                                        @switch($travel->status)
-                                        @case(1)
-                                        <td>Em progresso</td>
-                                        @break
-                                        @case(2)
-                                        <td>Finalizada</td>
-                                        @break
-                                        @case(3)
-                                        <td>Em atribuição (pendente)</td>
-                                        @break
-                                        @case(0)
-                                        <td>Cancelada</td>
-                                        @break
-                                        @endswitch
+
+
 
 
                                         <td class="td-actions text-right">
 
-                                            <a href="{{ route('travels.show', $travel) }}" class="btn btn-link"
-                                                data-toggle="tooltip" data-placement="bottom" title="Ver atribuições">
+                                            <a href="{{ route('inscricoes.show', $inscricao) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Ver inscrições">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
-                                            <a href="{{ route('travels.edit', ['travel' => $travel]) }}"
-                                                class="btn btn-link" data-toggle="tooltip" data-placement="bottom"
-                                                title="Concluir viagem">
-                                                <i class="tim-icons icon-check-2"></i>
-                                            </a>
 
-                                            <form action="{{ route('travels.destroy', $travel) }}" method="post"
+
+                                            <form action="{{ route('inscricoes.destroy', $inscricao) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-link" data-toggle="tooltip"
-                                                    data-placement="bottom" title="Cancelar viagem"
+                                                    data-placement="bottom" title="Cancelar"
                                                     onclick="confirm('Confirmar cancelamento?') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
@@ -90,7 +74,7 @@
                 </div>
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
-                        {{ $travels->links() }}
+
                     </nav>
                 </div>
             </div>
