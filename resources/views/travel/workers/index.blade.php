@@ -69,11 +69,12 @@
 
                                         <td> {{ $worker->eta }}</td>
                                         @if($worker->last_travel)
-                                        <td> {{ $worker->last_travel }}</td>
+                                        <td> {{ $worker->free_at}}</td>
                                         @else
                                         <td> Agora</td>
                                         @endif
 
+                                        @if($worker->status!==1)
                                         <td class="td-actions text-right">
                                             {{--  <a href="{{ route('workers.show', $worker) }}" class="btn btn-link"
                                                 data-toggle="tooltip" data-placement="bottom" title="More Details">
@@ -94,6 +95,7 @@
                                                 </button>
                                             </form>  --}}
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -19,7 +19,19 @@ class WorkerController extends Controller
         $workers = Worker::latest()->paginate(25);
         foreach ($workers as $key=> $worker) {
 
-            $workers[$key]->eta = Carbon::parse($worker->updated_at)->diffForHumans();
+
+            if($workers[$key]->last_travel){
+                if(Carbon::parse($workers[$key]->last_travel)<Carbon::now()){
+                    $workers[$key]->last_travel = null;
+                    $workers[$key]->status = 0;
+                    $workers[$key]->save();
+                }else{
+
+                    $workers[$key]['free_at'] = Carbon::parse($workers[$key]->last_travel)->diffForHumans();
+                }
+                $workers[$key]['eta'] = Carbon::parse($worker->updated_at)->diffForHumans();
+
+            }
         }
 
         return view ('travel.workers.index',compact('workers'));

@@ -15,10 +15,12 @@ class CreateTravelTable extends Migration
     {
         Schema::create('travel', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('status')->default(1)->comment('1-working , 0->canceled , 2->done');
+            $table->integer('status')->default(3)->comment('1-working , 0->canceled , 2->done 3-em atribuicao');
             $table->timestamp('end_time')->nullable();
             $table->unsignedBigInteger('train_id');
             $table->foreign('train_id')->references('id')->on('trains')->onDelete('cascade');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             // $table->unsignedBigInteger('worker_id');
             // $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade');
             $table->timestamps();

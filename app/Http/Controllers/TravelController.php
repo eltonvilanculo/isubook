@@ -6,6 +6,7 @@ use App\Assignment;
 use App\Train;
 use App\Travel;
 use App\Worker;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TravelController extends Controller
@@ -48,7 +49,7 @@ class TravelController extends Controller
     public function store(Request $request,Travel $model)
     {
         //
-        dd($request->all());
+
 
         // $worker =Worker::findOrFail($request->worker_id);
         // $worker->status =  1 ;
@@ -68,7 +69,21 @@ class TravelController extends Controller
 
     public function addworker(Travel $travel)
     {
+
+        $workersStandby = Worker::where('status', 2)->get();
+
+        foreach ($workersStandby as $key=> $worker) {
+            if($workersStandby[$key]->last_travel){
+                if(Carbon::parse($workersStandby[$key]->last_travel)<Carbon::now()){
+                    $workersStandby[$key]->last_travel = null;
+                    $workersStandby[$key]->status = 0;
+                    $workersStandby[$key]->save();
+                }}
+
+        }
+
         $workers = Worker::where('status', 0)->get();
+
 
 
         return view('travel.assignment.assign', compact('travel', 'workers'));
@@ -112,14 +127,19 @@ class TravelController extends Controller
         //
 
         $travel->status = 2;
+        $travel->train->status  = 0 ;
+
 
         foreach ($travel->workers as $worker){
-            $worker->worker->status= 0 ;
+            $worker->worker->status= 2 ;
+            $worker->worker->total_travel+= 1 ;
+            $worker->worker->last_travel =Carbon::now()->addHours(8);
+
             $worker->worker->save();
 
         }
 
-
+        $travel->train->save();
         $travel->save();
         return redirect()
         ->route('travels.index')

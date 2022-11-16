@@ -8,7 +8,7 @@ class Assignment extends Model
 {
     //
     protected $fillable = [
-        'worker_id', 'travel_id'
+        'worker_id', 'travel_id','start_at','end_at'
     ];
 
     public function worker()

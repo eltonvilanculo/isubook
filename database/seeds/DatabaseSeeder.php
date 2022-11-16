@@ -2,6 +2,7 @@
 
 use App\ProductCategory;
 use App\Provinces;
+use App\Route;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,18 +19,24 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
 
 
-        factory(User::class,25)->create();
+        // factory(User::class,25)->create();
 
-    // User::insert([
+    User::insert([
 
-    //         [
-    //         'name'=>'Admin',
-    //         'email'=>'admin@Acervo Académico Brazão Mazula.co.mz',
-    //         'password'=>Hash::make('12345678'),
-    //         'type'=>0,
-    //         ],
+            [
+            'name'=>'Admin',
+            'email'=>'eltonvillas10@gmail.com',
+            'password'=>Hash::make('12345678'),
+            'type'=>0,
+            ],
 
-    //     ]);
+        ]);
+
+        Route::create([
+            'name'=>'Maputo-Xai'
+        ]);
+
+
 
 
     //     ProductCategory::insert([
