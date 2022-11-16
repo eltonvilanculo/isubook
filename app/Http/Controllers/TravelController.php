@@ -177,7 +177,8 @@ class TravelController extends Controller
 
         }
         $travel->status = 0;
-
+        $travel->train->status  = 0 ;
+        $travel->train->save();
         $travel->save();
 
         return redirect()
@@ -196,6 +197,7 @@ class TravelController extends Controller
 
             $worker->worker->save();
         }
+        $travel->train->save();
         $travel->save();
         return redirect()
         ->route('travels.index')
