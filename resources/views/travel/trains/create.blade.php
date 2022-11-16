@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="form-group{{ $errors->has('route_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">Rota</label>
+                                    <label class="form-control-label" for="input-name">Trajetoria</label>
                                     <select name="route_id" id="input-category" class="form-select form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" required>
                                         @foreach ($routes as $route)
 
@@ -41,8 +41,23 @@
 
                                 <div class="form-group{{ $errors->has('vagon') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-vagon">Vagões</label>
-                                    <input type="number" name="vagon" id="input-vagon" class="form-control form-control-alternative" placeholder="1" value="{{ old('vagon') }}" >
+                                    <input type="number" name="vagons" id="input-vagon" class="form-control form-control-alternative" placeholder="1" value="{{ old('vagon') }}" >
                                     @include('alerts.feedback', ['field' => 'vagon'])
+                                </div>
+                                <div class="form-group{{ $errors->has('tonelagem') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-tonelagem">Tonelagem</label>
+                                    <input type="number" name="tonelagem" id="input-tonelagem" class="form-control form-control-alternative" placeholder="Tonelagem" value="{{ old('tonelagem') }}" >
+                                    @include('alerts.feedback', ['field' => 'tonelagem'])
+                                </div>
+                                <div class="form-group{{ $errors->has('tipo_carga') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-tipo_carga">Tipo de Carga</label>
+                                    <input type="text" name="tipo_carga" id="input-tipo_carga" class="form-control form-control-alternative" placeholder="Tipo de carga" value="{{ old('tipo_carga') }}" >
+                                    @include('alerts.feedback', ['field' => 'tipo_carga'])
+                                </div>
+                                <div class="form-group{{ $errors->has('tipo_servico') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-tipo_servico">Tipo de Serviço</label>
+                                    <input type="text" name="tipo_servico" id="input-tipo_servico" class="form-control form-control-alternative" placeholder="Tipo de serviço" value="{{ old('tipo_servico') }}" >
+                                    @include('alerts.feedback', ['field' => 'tipo_servico'])
                                 </div>
 
 

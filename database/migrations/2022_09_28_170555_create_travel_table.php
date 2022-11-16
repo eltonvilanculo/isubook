@@ -19,8 +19,8 @@ class CreateTravelTable extends Migration
             $table->timestamp('end_time')->nullable();
             $table->unsignedBigInteger('train_id');
             $table->foreign('train_id')->references('id')->on('trains')->onDelete('cascade');
-            $table->unsignedBigInteger('worker_id');
-            $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade');
+            // $table->unsignedBigInteger('worker_id');
+            // $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,8 +17,10 @@ class CreateWorkersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(0)->comment('livre , ocupado,standby,doente, de folga, nojo');
             $table->integer('type');
+            $table->integer('total_travel')->default(0);
+            $table->dateTime('last_travel')->nullable();
             $table->timestamps();
         });
     }

@@ -16,7 +16,11 @@ class CreateTrainsTable extends Migration
         Schema::create('trains', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->integer('status')->default(0)->comment('0-stop 1-on assinment 2-traveling');
             $table->integer('vagons')->nullable();
+            $table->integer('tonelagem')->nullable();
+            $table->string('tipo_carga')->nullable();
+            $table->string('tipo_servico')->nullable();
             $table->unsignedBigInteger('route_id');
             $table->foreign('route_id')->references('id')->on('routes')->onDelete('cascade');
             $table->timestamps();

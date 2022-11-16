@@ -23,6 +23,9 @@
                                 <th scope="col">Rota</th>
                                 <th scope="col">Designação</th>
                                 <th scope="col">Vagões</th>
+                                <th scope="col">Tonelagem</th>
+                                <th scope="col">Carga</th>
+                                <th scope="col">Serviço</th>
                                 <th scope="col">Estado</th>
                                 {{--  <th scope="col"></th>  --}}
                             </thead>
@@ -33,6 +36,9 @@
                                         <td>{{ $train->name }}</td>
 
                                         <td>{{ $train->vagons }}</td>
+                                        <td>{{ $train->tonelagem }}</td>
+                                        <td>{{ $train->tipo_carga }}</td>
+                                        <td>{{ $train->tipo_servico }}</td>
 
                                         @switch($train->status)
 

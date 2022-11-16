@@ -58,3 +58,13 @@
         </div>
     </div>
 @endsection
+
+
+@push('js')
+    <script>
+        new SlimSelect({
+            select: '.form-select'
+        });
+    </script>
+
+@endpush

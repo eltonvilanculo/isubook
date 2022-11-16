@@ -48,6 +48,7 @@ class TravelController extends Controller
     public function store(Request $request,Travel $model)
     {
         //
+        dd($request->all());
 
         // $worker =Worker::findOrFail($request->worker_id);
         // $worker->status =  1 ;
@@ -168,7 +169,6 @@ class TravelController extends Controller
     public function finalize(Travel $travel){
         $travel->status =  1 ;//progress;
         $travel->train->status = 2; //traveling;
-        $travel->train->save();
 
         foreach($travel->workers as $worker) {
 

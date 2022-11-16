@@ -73,6 +73,8 @@ class WorkerController extends Controller
     public function edit(Worker $worker)
     {
         //
+        return view ('travel.workers.edit',compact('worker'));
+
     }
 
     /**
@@ -85,6 +87,11 @@ class WorkerController extends Controller
     public function update(Request $request, Worker $worker)
     {
         //
+        $worker->update($request->all());
+
+        return redirect()
+            ->route('workers.index')
+            ->withStatus('Maquinista actualizado');
     }
 
     /**

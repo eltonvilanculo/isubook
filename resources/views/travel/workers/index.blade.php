@@ -23,10 +23,12 @@
                                 <th>Nome</th>
                                 <th>Contacto</th>
                                 <th>Categoria</th>
+                                <th>Viagens Realizadas</th>
                                 <th>Estado de ocupação</th>
                                 <th>Fazem</th>
+                                <th>Estará livre em ?</th>
 
-                                {{--  <th></th>  --}}
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($workers as $worker)
@@ -38,24 +40,50 @@
                                             {{ $worker->phone }}
                                         </td>
                                         <td>{{ $worker->type == 1 ? 'Maqnta A' : 'Maqnta B' }}</td>
-                                        @if ($worker->status === 0)
+                                        <td> {{ $worker->total_travel }}</td>
+                                        @switch($worker->status)
+                                            @case(0)
                                             <td> <span class="text-success">Livre</span> </td>
-                                        @else
-                                            <td> <span class="text-primary">Ocupado</span> </td>
-                                        @endif
+                                                @break
+                                            @case(1)
+                                            <td> <span class="text-primary">Ocupado(Em viagem)</span> </td>
+                                                @break
+                                            @case(2)
+                                            <td> <span class="text-primary">Standby</span> </td>
+                                                @break
+
+                                            @case(3)
+                                            <td> <span class="text-warning">Doente</span> </td>
+                                                @break
+                                            @case(4)
+                                            <td> <span class="text-warning">Folga</span> </td>
+                                                @break
+                                            @case(5)
+                                            <td> <span class="text-warning">Nojo</span> </td>
+                                                @break
+
+                                            @default
+
+                                        @endswitch
+
 
                                         <td> {{ $worker->eta }}</td>
+                                        @if($worker->last_travel)
+                                        <td> {{ $worker->last_travel }}</td>
+                                        @else
+                                        <td> Agora</td>
+                                        @endif
 
-                                        {{--  <td class="td-actions text-right">
-                                            <a href="{{ route('workers.show', $worker) }}" class="btn btn-link"
+                                        <td class="td-actions text-right">
+                                            {{--  <a href="{{ route('workers.show', $worker) }}" class="btn btn-link"
                                                 data-toggle="tooltip" data-placement="bottom" title="More Details">
                                                 <i class="tim-icons icon-zoom-split"></i>
-                                            </a>
+                                            </a>  --}}
                                             <a href="{{ route('workers.edit', $worker) }}" class="btn btn-link"
-                                                data-toggle="tooltip" data-placement="bottom" title="Edit worker">
+                                                data-toggle="tooltip" data-placement="bottom" title="Editar maquinista">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </a>
-                                            <form action="{{ route('workers.destroy', $worker) }}" method="post"
+                                            {{--  <form action="{{ route('workers.destroy', $worker) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('delete')
@@ -64,8 +92,8 @@
                                                     onclick="confirm('Estás seguro que quieres eliminar a este worker? Los registros de sus compras y Transactions no serán eliminados.') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
-                                            </form>
-                                        </td>  --}}
+                                            </form>  --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

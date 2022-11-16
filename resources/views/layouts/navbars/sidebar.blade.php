@@ -29,7 +29,7 @@
                             <li @if ($pageSlug == 'routes') class="active " @endif>
                                 <a href="{{ route('routes.index') }}">
                                     <i class="tim-icons icon-square-pin"></i>
-                                    <p>Rotas</p>
+                                    <p>Trajetorias</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'trains') class="active " @endif>

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Gestão de Rotas', 'pageSlug' => 'categories', 'section' => 'inventory'])
+@extends('layouts.app', ['page' => 'Gestão de Trajetorias', 'pageSlug' => 'categories', 'section' => 'inventory'])
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Rotas</h4>
+                            <h4 class="card-title">Trajetorias</h4>
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary">Nova rota</a>
